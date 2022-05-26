@@ -1,32 +1,166 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+        <!-- 網頁標題 -->
+      <v-list-item to="/">
+        <v-list-item-content>
+          <v-list-item-title class="title"> 好友列表(3) </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <!--  -->
+        
+ 
+
+      <!-- 列表 -->
+       <v-list two-line>
+      <v-list-item-group
+        v-model="selected"
+        active-class="pink--text"
+        multiple
+      >
+        <template v-for="(item, index) in items">
+          <v-list-item :key="item.title">
+            <template v-slot:default="{ active }">
+              <v-list-item-content>
+                <v-container fluid>
+                   <v-row
+                    align="center"
+                    class="spacer"
+                    no-gutters
+                  >
+                    <v-col
+                      cols="4"
+                      sm="2"
+                      md="1"
+                    >
+                <v-avatar
+                  size="30px"
+                  
+                >
+                  <img
+                    v-if="item.avatar"
+                    alt="Avatar"
+                    src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                  >
+                  <v-icon
+                    v-else
+                    :color="item.color"
+                    v-text="item.icon"
+                  ></v-icon>
+                </v-avatar>
+              </v-col>
+             <v-col 
+             class="ml-5">
+               <v-list-item-title v-text="item.title"></v-list-item-title>
+               <v-list-item-subtitle v-text="item.subtitle"></v-list-item-subtitle>
+             </v-col>
+            </v-row>
+                </v-container>
+
+                
+<!-- 
+                <v-list-item-subtitle
+                  class="text--primary"
+                  v-text="item.headline"
+                ></v-list-item-subtitle> -->
+
+                
+              </v-list-item-content>
+
+              <v-list-item-action>
+                <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
+
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+         <!-- 列表底線 -->
+          <v-divider
+            v-if="index < items.length"
+            :key="index"
+          ></v-divider>
+
+        </template>
+      </v-list-item-group>
+    </v-list>
+  </v-navigation-drawer>
+
+<!-- 上框 -->
+    <v-card flat>
+     <v-container fluid>
+      <v-row class="child-flex">
+         <div style="flex-basis:80%">
+          <v-toolbar color="blue">
+            <v-spacer></v-spacer>
+             <v-toolbar-title class="white--text">Cherri Chat</v-toolbar-title>
+            <v-spacer></v-spacer>
+
+           <div class="text-center">
+              <v-btn
+                rounded
+                color="primary"
+                white
+              >
+                中文
+              </v-btn>
+            </div>
+
+            <div class="text-center ml-4">
+              <v-btn
+                rounded
+                color="primary"
+                dark
+              >
+               English
+              </v-btn>
+            </div>
+          </v-toolbar>
+        </div>
+        <div>
+          <v-toolbar color="blue">
+            <v-avatar
+              color="white"
+              size="56"
+            ></v-avatar>
+            <v-toolbar-title class="white--text ml-4">潔西卡</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+        </div>
+
+       
+      </v-row>
+    </v-container>
+  </v-card>
+    <v-main>
+      <!--  -->
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+  export default {
+    data: () => ({ 
+      drawer: null,
+       items: [
+        {
+          title: '保羅',
+          subtitle: `大家好，我是保羅~`,
+          avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+        },
+        {
+          title: '傑克',
+          subtitle: `大家好，我是傑克~`,
+        },
+        {
+          title: '傑森',
+          subtitle: `大家好，我是傑森~`,
+        },
+      ],
+      
+      }),
+  }
+</script>
